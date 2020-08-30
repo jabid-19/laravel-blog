@@ -36,8 +36,13 @@
 
                         <div class="form-group">
                             <label for="exampleFormControlFile1">Upload Image</label>
-                            <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
+                            <input type="file" name="image" class="form-control-file" id="image" accept = 'image/png'>
+
+                            <span class="text-danger ">{{$errors->has('image') ? $errors->first('image') : ''}}</span>
                         </div>
+
+
+
 
                         <button type="submit" class="btn btn-primary">Create</button>
                         {{Form::close()}}

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         Posts
@@ -17,33 +17,37 @@
                             </div>
                         @endif
 
-                        <table class="table text-center">
+                        <table class="table text-center" id="posts">
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Title</th>
                                 <th scope="col">Body</th>
-                                {{--                                <th scope="col">User Name</th>--}}
                                 <th scope="col">Category Name</th>
                                 <th scope="col">Image</th>
-                                <th scope="col">Status</th>
+{{--                                <th scope="col">Status</th>--}}
+                                <th scope="col">Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             @php($i = 1)
                             @foreach($posts as $post)
                                 <tr>
-                                    <th scope="row">{{$i++}}</th>
+                                    <td scope="row">{{$i++}}</td>
                                     <td>{{$post->title}}</td>
                                     <td>{{$post->body}}</td>
                                     {{--                                    <td>{{$post->user->name}}</td>--}}
                                     <td>{{$post->category->name}}</td>
-                                    <td><img src="images/{{ asset($post->image) }}"/></td>
-                                    <td>
-                                        {{--                                        <a href="{{route('posts.status.update', $post->id)}}"  onclick="return confirm('Are you sure to change!!!')">--}}
-                                        {{$post->status == 1 ? 'Active' : 'Inactive'}}
-                                        </a>
-                                    </td>
+                                    <td><img src="{{ asset('images/'.$post->image) }}" width="100px" height="100px"
+                                             alt="image"/></td>
+
+{{--                                    <td>--}}
+{{--                                        <a href="{{route('posts.status.update', $post->id)}}"--}}
+{{--                                           onclick="return confirm('Are you sure to change!!!')">--}}
+{{--                                            {{$post->status == 1 ? 'Active' : 'Inactive'}}--}}
+{{--                                        </a>--}}
+{{--                                    --}}
+{{--                                    </td>--}}
                                     <td>
                                         <a href="{{route('posts.edit', $post->id)}}"
                                            class="btn btn-primary btn-sm">Edit</a>
@@ -69,4 +73,24 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+
+{{--    <script>--}}
+{{--        $(document).ready(function () {--}}
+{{--            $('#posts').DataTable();--}}
+{{--        });--}}
+{{--    </script>--}}
+
+    <script>
+    $(document).ready( function () {
+        $('#posts').DataTable({
+            "columnDefs": [
+                { "orderable": false, "targets": [5, 4] }
+            ]
+        });
+    } );
+    </script>
+
 @endsection

@@ -2,12 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Post;
-use App\User;
-use App\Category;
+use App\Forum;
 use Faker\Generator as Faker;
 
-$factory->define(Post::class, function (Faker $faker) {
+$factory->define(Forum::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence(4),
         'body' => $faker->sentence,

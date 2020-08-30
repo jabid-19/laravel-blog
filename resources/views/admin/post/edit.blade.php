@@ -10,27 +10,27 @@
                         <a href="{{route('posts.index')}}" class="btn btn-warning btn-sm float-right">Back</a>
                     </div>
 
+
                     <div class="card-body">
-                        {{Form::open(['route' => 'posts.store', 'method' => 'POST', 'enctype'=>"multipart/form-data" ])}}
+                        {{Form::open(['route' => ['posts.update',$post->id], 'method' => 'PUT', 'enctype'=>"multipart/form-data" ])}}
                         <div class="form-group">
                             <label for="exampleInputEmail1">Title</label>
-                            <input type="text" name="title" value="{{$post->title}}" for="title" class="form-control" id="title">
+                            <input type="text" name="title" value="{{$post->title}}" for="title" class="form-control"
+                                   id="title">
                             <span class="text-danger ">{{$errors->has('title') ? $errors->first('title') : ''}}</span>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Body</label>
-                            <input type="textarea" name="body"  value="{{$post->body}}" for="body" class="form-control" id="body">
+                            <input type="textarea" name="body" value="{{$post->body}}" for="body" class="form-control"
+                                   id="body">
                             <span class="text-danger ">{{$errors->has('body') ? $errors->first('body') : ''}}</span>
                         </div>
 
                         <div class="form-group">
                             <select class="custom-select mb-3" name="category_id">
-                                <option selected>Select Category</option>
-{{--                                @foreach($categories as $category)--}}
-{{--                                    <option value="{{$category->id}}">{{$category->name}}</option>--}}
-{{--                                    <span--}}
-{{--                                        class="text-danger ">{{$errors->has('category_id') ? $errors->first('category_id') : ''}}</span>--}}
-{{--                                @endforeach--}}
+                                @foreach($categories as $category)
+                                    <option value="{{$category->id}}" {{$category->id == $post->category_id ? 'selected' : '' }}>{{$category->name}}</option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -39,7 +39,7 @@
                             <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                         {{Form::close()}}
                     </div>
                 </div>

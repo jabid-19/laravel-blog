@@ -12,9 +12,21 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $categories = Category::orderBy('id', 'desc')->get();
+//        $categories = Category::orderBy('id', 'desc')->get();
+        $categories = Category::orderBy('id', 'desc')->paginate(5);
         return view('admin.category.index', compact('categories'));
 
     }
